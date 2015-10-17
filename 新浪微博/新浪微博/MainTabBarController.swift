@@ -13,7 +13,6 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        tabBar.tintColor=UIColor.orangeColor()
         addChildViewControllers()
         
     }
@@ -62,7 +61,7 @@ class MainTabBarController: UITabBarController {
     // MARK: - 注册按钮懒加载
   private lazy var registerButton:UIButton = {
     let btn=UIButton()
-    btn.setImage(UIImage(named: "view.addSubview(settingAddButton())"), forState: UIControlState.Normal)
+    btn.setImage(UIImage(named: "tabbar_compose_icon_add"), forState: UIControlState.Normal)
     btn.setBackgroundImage(UIImage(named: "tabbar_compose_button"), forState: UIControlState.Normal)
      btn.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), forState: UIControlState.Highlighted)
     btn.addTarget(self, action: "clickRegisterButton", forControlEvents: UIControlEvents.TouchUpInside)
@@ -71,10 +70,17 @@ class MainTabBarController: UITabBarController {
     return btn
     }()
     // MARK: - 注册按钮的点击事件
-     func clickRegisterButton(){
+    func clickRegisterButton(){
     
-    print(__FUNCTION__)
+        let alert=UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let action=UIAlertAction(title: "网络不给力哇", style: UIAlertActionStyle.Destructive, handler: nil)
+        
+        alert.addAction(action)
     
+        self.presentViewController(alert, animated: false){
+            ()->Void in
+
+        }
     
     }
 }

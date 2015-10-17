@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B52B3CC1BCEAF5100942BCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B52B3CB1BCEAF5100942BCE /* WelcomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		9B61E31B1BC8C598008AA5EA /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B61E31A1BC8C598008AA5EA /* NetworkTool.swift */; settings = {ASSET_TAGS = (); }; };
+		9B61E31E1BC92F9E008AA5EA /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B61E31D1BC92F9E008AA5EA /* OAuthViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		9B6937931BC7571E009B059E /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6937921BC7571E009B059E /* VisitorView.swift */; settings = {ASSET_TAGS = (); }; };
+		9B7233651BCF5B91001889FC /* NewfeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7233641BCF5B91001889FC /* NewfeatureViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		9BA170C61BCA4762008F71C9 /* UserAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA170C51BCA4762008F71C9 /* UserAccess.swift */; settings = {ASSET_TAGS = (); }; };
 		9BA223A21BC52AA4008719E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA223A11BC52AA4008719E1 /* AppDelegate.swift */; };
 		9BA223A91BC52AA4008719E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA223A81BC52AA4008719E1 /* Assets.xcassets */; };
 		9BA223BF1BC52EC0008719E1 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA223BE1BC52EC0008719E1 /* ProfileTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -18,6 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B52B3CB1BCEAF5100942BCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		9B61E31A1BC8C598008AA5EA /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
+		9B61E31D1BC92F9E008AA5EA /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
+		9B6937921BC7571E009B059E /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
+		9B7233641BCF5B91001889FC /* NewfeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewfeatureViewController.swift; sourceTree = "<group>"; };
+		9BA170C51BCA4762008F71C9 /* UserAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccess.swift; sourceTree = "<group>"; };
 		9BA2239E1BC52AA4008719E1 /* 新浪微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "新浪微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA223A11BC52AA4008719E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BA223A81BC52AA4008719E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -41,6 +53,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B52B3CA1BCEAF1F00942BCE /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				9B52B3CB1BCEAF5100942BCE /* WelcomeViewController.swift */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		9B61E31C1BC92E10008AA5EA /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				9B61E31D1BC92F9E008AA5EA /* OAuthViewController.swift */,
+			);
+			name = OAuth;
+			sourceTree = "<group>";
+		};
+		9B7233631BCF5B1D001889FC /* Newfeature */ = {
+			isa = PBXGroup;
+			children = (
+				9B7233641BCF5B91001889FC /* NewfeatureViewController.swift */,
+			);
+			name = Newfeature;
+			sourceTree = "<group>";
+		};
 		9BA223951BC52AA4008719E1 = {
 			isa = PBXGroup;
 			children = (
@@ -71,9 +107,12 @@
 		9BA223B41BC52D64008719E1 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				9B7233631BCF5B1D001889FC /* Newfeature */,
+				9B52B3CA1BCEAF1F00942BCE /* Welcome */,
+				9BA223B91BC52E0A008719E1 /* Main */,
+				9B61E31C1BC92E10008AA5EA /* OAuth */,
 				9BA223BB1BC52E1C008719E1 /* Profile */,
 				9BA223BA1BC52E14008719E1 /* Message */,
-				9BA223B91BC52E0A008719E1 /* Main */,
 				9BA223B81BC52E03008719E1 /* Home */,
 				9BA223B71BC52DF3008719E1 /* Discover */,
 			);
@@ -83,6 +122,7 @@
 		9BA223B51BC52DC6008719E1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				9B61E31A1BC8C598008AA5EA /* NetworkTool.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -90,6 +130,7 @@
 		9BA223B61BC52DCF008719E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9BA170C51BCA4762008F71C9 /* UserAccess.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -115,6 +156,7 @@
 			children = (
 				9BA223C21BC52F5B008719E1 /* MainTabBarController.swift */,
 				9BE464F21BC57A750012C511 /* BasicTableViewController.swift */,
+				9B6937921BC7571E009B059E /* VisitorView.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -214,12 +256,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA223BF1BC52EC0008719E1 /* ProfileTableViewController.swift in Sources */,
+				9BA170C61BCA4762008F71C9 /* UserAccess.swift in Sources */,
+				9B7233651BCF5B91001889FC /* NewfeatureViewController.swift in Sources */,
+				9B61E31B1BC8C598008AA5EA /* NetworkTool.swift in Sources */,
 				9BA223A21BC52AA4008719E1 /* AppDelegate.swift in Sources */,
 				9BE464F31BC57A750012C511 /* BasicTableViewController.swift in Sources */,
+				9B61E31E1BC92F9E008AA5EA /* OAuthViewController.swift in Sources */,
 				9BA223C31BC52F5B008719E1 /* MainTabBarController.swift in Sources */,
 				9BA223C11BC52EDB008719E1 /* MessageTableViewController.swift in Sources */,
 				9BA223C71BC52F83008719E1 /* DiscoverTableViewController.swift in Sources */,
+				9B52B3CC1BCEAF5100942BCE /* WelcomeViewController.swift in Sources */,
 				9BA223C51BC52F73008719E1 /* HomeTableViewController.swift in Sources */,
+				9B6937931BC7571E009B059E /* VisitorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +359,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = launchImage;
 				INFOPLIST_FILE = "新浪微博/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.lee.----";
@@ -323,7 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = launchImage;
 				INFOPLIST_FILE = "新浪微博/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.lee.----";
