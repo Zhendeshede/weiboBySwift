@@ -22,12 +22,12 @@ class UserAccess: NSObject,NSCoding {
 
     
 //    token的生命周期，单位是秒数
-    var expires_in:NSTimeInterval=0{
+   private var expires_in:NSTimeInterval=0{
         didSet{
         expiresDate=NSDate(timeIntervalSinceNow: expires_in)
         }
     }
-     var expiresDate:NSDate?
+    private var expiresDate:NSDate?
     
     //用户昵称
     var name:String?

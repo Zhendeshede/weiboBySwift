@@ -38,6 +38,31 @@ private enum NetworkError:Int{
 
 class NetworkTool: NSObject {
   
+    //MARK:- 检查token
+    private func checkToken(finished:FinishedCallBack)->[String:AnyObject]?{
+        if UserAccess.loadUserAccount?.access_token == nil{
+            let error = NetworkError.emptyTokenError.error()
+            finished(result: nil, error: error)
+            return nil
+        }
+    
+            //返回字典时为啦包成参数，这样直接再添加额外参数就可
+    return ["access_token":UserAccess.loadUserAccount!.access_token!]
+    }
+    
+    //MARK:- 加载微博数据
+    func loadWeiboData(finished:FinishedCallBack){
+    
+        guard let param=checkToken(finished) else{
+        
+        return
+        }
+       let urlString = "https://api.weibo.com/2/statuses/home_timeline.json"
+       
+        networkRequest(.GET, URLString: urlString, paramater: param, finished: finished)
+    }
+    
+    
     
     static let shareNetworkTool=NetworkTool()
     //MARK: - OAuth授权
@@ -58,16 +83,15 @@ class NetworkTool: NSObject {
     func loadUserInfo(uid:String,finished:FinishedCallBack){
     
    //判断token是否存在
-        if UserAccess.loadUserAccount?.access_token == nil{
+        guard var param = checkToken(finished) else{
          finished(result: nil, error: NetworkError.emptyTokenError.error())
-            
         return
         }
         
         
-            let url="https://api.weibo.com/2/users/show.json"
-        let param:[String:AnyObject]=["access_token":UserAccess.loadUserAccount!.access_token!
-,"uid":uid]
+        let url="https://api.weibo.com/2/users/show.json"
+         param["uid"]=uid
+
         networkRequest(.GET, URLString: url, paramater: param, finished: finished)
 
 
@@ -91,13 +115,13 @@ class NetworkTool: NSObject {
     //                                              这里要加问号，有可能为空
     typealias FinishedCallBack = (result:AnyObject?,error:NSError?)->()
    ///网络请求方式枚举
-    private enum HttpMethod:String{
+     enum HttpMethod:String{
        case GET = "GET"
         case POST = "POST"
     
     }
     //MARK:- 封装网络请求方法
-    private func networkRequest(methed:HttpMethod,URLString:String,paramater:[String:AnyObject],finished:FinishedCallBack){
+    func networkRequest(methed:HttpMethod,URLString:String,paramater:[String:AnyObject],finished:FinishedCallBack){
         var body = ""
         for (key,value) in paramater{
         body += "\(key)=\(value as! String)&"
@@ -118,9 +142,19 @@ class NetworkTool: NSObject {
         
         NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
             
+            
+            if error != nil || data == nil{
+
+            finished(result: nil, error: error)
+            return
+            }
             do{
                 let obj = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
-                finished(result: obj, error: nil)
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    finished(result: obj, error: nil)
+                })
+                
             }catch{
                 
                 finished(result: nil, error: NetworkError.emptyDataError.error())

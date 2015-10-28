@@ -42,6 +42,8 @@ class OAuthViewController: UIViewController , UIWebViewDelegate {
 //        
 //
 //    }
+    
+
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         //判断是否包含回调地址，如果包含，就返回false，这样就不会加载回调地址
         let urlString=request.URL?.absoluteString
@@ -88,7 +90,7 @@ class OAuthViewController: UIViewController , UIWebViewDelegate {
                     
                 }
                 
-                dispatch_sync(dispatch_get_main_queue()
+                dispatch_async(dispatch_get_main_queue()
                     , { () -> Void in
                         NSNotificationCenter.defaultCenter().postNotificationName(SwitchMainInterfaceNotification, object: false)
                         

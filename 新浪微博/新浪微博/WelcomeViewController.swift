@@ -47,7 +47,9 @@ class WelcomeViewController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: iconView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 90))
         
         view.addConstraint(NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: iconView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 150))
+        
         iconBottomC=view.constraints.last
+        
         label.translatesAutoresizingMaskIntoConstraints=false
         view.addConstraint(NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: iconView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 10))
         view.addConstraint(NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: iconView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
@@ -64,11 +66,16 @@ class WelcomeViewController: UIViewController {
             
 
         if let urlString = UserAccess.loadUserAccount?.avatar_large{
-        NSURLSession.sharedSession().downloadTaskWithURL(NSURL(string: urlString)!, completionHandler: { (location, _, _) -> Void in
-           
+        NSURLSession.sharedSession().downloadTaskWithURL(NSURL(string: urlString)!, completionHandler: { (location, _, error) -> Void in
+            if error != nil{
+            
+            //网络不给力
+            return
+            }
             
             if let data=NSData(contentsOfURL: location!){
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
                 self.iconView.image=UIImage(data: data)
                 self.label.text = UserAccess.loadUserAccount!.name
                 
