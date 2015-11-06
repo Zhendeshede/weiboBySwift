@@ -51,12 +51,25 @@ class NetworkTool: NSObject {
     }
     
     //MARK:- 加载微博数据
-    func loadWeiboData(finished:FinishedCallBack){
+    func loadWeiboData(since_id:Int,max_id:Int,finished:FinishedCallBack){
     
-        guard let param=checkToken(finished) else{
+        guard var param=checkToken(finished) else{
         
         return
         }
+        if since_id>0{
+            param["since_id"]="\(since_id)";
+        
+        
+        }
+        if max_id>0{
+        
+        
+            param["max_id"]="\(max_id-1)";
+        }
+        
+        
+        
        let urlString = "https://api.weibo.com/2/statuses/home_timeline.json"
        
         networkRequest(.GET, URLString: urlString, paramater: param, finished: finished)
@@ -130,6 +143,7 @@ class NetworkTool: NSObject {
         body = (body as NSString).substringToIndex(body.characters.count-1)
         
         let request = NSMutableURLRequest()
+
         switch methed{
         case .POST :
             request.URL = NSURL(string: URLString)
@@ -146,17 +160,19 @@ class NetworkTool: NSObject {
             if error != nil || data == nil{
 
             finished(result: nil, error: error)
+            
             return
             }
             do{
                 let obj = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+
                     finished(result: obj, error: nil)
                 })
                 
             }catch{
-                
+
                 finished(result: nil, error: NetworkError.emptyDataError.error())
             }
             

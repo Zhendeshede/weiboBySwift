@@ -77,7 +77,7 @@ class StatusesPictureView: UICollectionView,UICollectionViewDataSource {
         return layout
         }()
         
-            override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
             super.init(frame: frame, collectionViewLayout: pictureLayout)
             backgroundColor=UIColor(white: 0.98, alpha: 1.0)
             registerClass(StatusesCollectionCell.self, forCellWithReuseIdentifier: identifier)
@@ -132,9 +132,9 @@ private class StatusesCollectionCell:UICollectionViewCell{
             imgView.image = img
                
                 return
-NSURLConnection
+
             }
-         print("ooooooo")
+      
         NSURLSession.sharedSession().downloadTaskWithURL(imageURL!) { (location, _, error) -> Void in
            
             if error != nil{

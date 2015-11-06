@@ -31,6 +31,7 @@
 		9BBB12351BD62798003BB762 /* RelayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBB12341BD62798003BB762 /* RelayTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		9BBD7BD71BD3B476008F35A4 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD7BD61BD3B476008F35A4 /* UILabel+Extension.swift */; settings = {ASSET_TAGS = (); }; };
 		9BBD7BD91BD3B744008F35A4 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD7BD81BD3B744008F35A4 /* UIButton+Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		9BD2A30C1BE107930096B235 /* DataRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2A30B1BE107930096B235 /* DataRefreshControl.swift */; settings = {ASSET_TAGS = (); }; };
 		9BE464F31BC57A750012C511 /* BasicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE464F21BC57A750012C511 /* BasicTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		9BBB12341BD62798003BB762 /* RelayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelayTableViewCell.swift; sourceTree = "<group>"; };
 		9BBD7BD61BD3B476008F35A4 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		9BBD7BD81BD3B744008F35A4 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		9BD2A30B1BE107930096B235 /* DataRefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRefreshControl.swift; sourceTree = "<group>"; };
 		9BE464F21BC57A750012C511 /* BasicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +184,7 @@
 		9BA223B81BC52E03008719E1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9BD2A30A1BE104430096B235 /* RefreshControl */,
 				9BBB12331BD62710003BB762 /* WeiboTableViewCell */,
 				9B6B0E871BD1E5E7007A8F8A /* HomeTitleButton.swift */,
 				9BA223C41BC52F73008719E1 /* HomeTableViewController.swift */,
@@ -234,6 +237,14 @@
 				9BBB12341BD62798003BB762 /* RelayTableViewCell.swift */,
 			);
 			name = WeiboTableViewCell;
+			sourceTree = "<group>";
+		};
+		9BD2A30A1BE104430096B235 /* RefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				9BD2A30B1BE107930096B235 /* DataRefreshControl.swift */,
+			);
+			name = RefreshControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +320,7 @@
 				9B9DE2411BD718A7002069C3 /* ImageDS.swift in Sources */,
 				9BA170C61BCA4762008F71C9 /* UserAccess.swift in Sources */,
 				9B7233651BCF5B91001889FC /* NewfeatureViewController.swift in Sources */,
+				9BD2A30C1BE107930096B235 /* DataRefreshControl.swift in Sources */,
 				9B61E31B1BC8C598008AA5EA /* NetworkTool.swift in Sources */,
 				9BA223A21BC52AA4008719E1 /* AppDelegate.swift in Sources */,
 				9B6B0E8E1BD23832007A8F8A /* UserInfo.swift in Sources */,

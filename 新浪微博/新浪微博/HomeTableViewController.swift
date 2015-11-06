@@ -34,13 +34,94 @@ class HomeTableViewController: BasicTableViewController {
     
     
     
+    //MARK:- 下拉刷新数据后提示
+    private func alertForRefreshing(count:Int){
+        
+
+
+        
+        if (alertLabel.layer.animationForKey("position") != nil){
+        
+        return
+        }
+        alertLabel.text = (count != 0) ? "刷新到\(count)条数据" : "暂时没有新微博"
+         let rect = alertLabel.frame
+        
+        UIView.animateWithDuration(3.5, animations: { () -> Void in
+            UIView.setAnimationRepeatAutoreverses(true)
+            self.alertLabel.frame=CGRectOffset(rect, 0, 3*rect.height)
+            
+            
+            }) { (_) -> Void in
+                
+            self.alertLabel.frame=rect
+                
+        }
+        
+        
+        
+        
+    }
+    private lazy var alertLabel:UILabel = {
+        let height:CGFloat = self.navigationController!.navigationBar.bounds.height
+        let label = UILabel(color: UIColor.purpleColor(), fontSize: 13)
+        label.backgroundColor=UIColor.orangeColor()
+        label.textAlignment=NSTextAlignment.Center
+        label.frame = CGRect(x: 0, y: -2 * height, width: self.view.bounds.width, height: height)
+         self.navigationController!.navigationBar.insertSubview(label, atIndex: 0)
+        
+        return label
+    }()
+//
+    
+    private var stretchingUp = false
+    
     func loadData(){
         
-        WeiboData.loadStatuses {[weak self] (result, error) -> () in
-            //TODO:
-            self!.statues=result
-            
+            refreshControl?.beginRefreshing()
+
+
+        //第一次执行status为空
+        var since_id = statues?.first?.id ?? 0
+        var max_id=0;
+        
+        if self.stretchingUp{
+           max_id = statues?.last?.id ?? 0
+            since_id = 0
         }
+        
+        WeiboData.loadStatuses(since_id,max_id:max_id) {(result, error) -> () in
+            self.refreshControl?.endRefreshing()
+            
+            
+            //TODO:
+            let count = result?.count
+            
+            if since_id>0{
+            
+            self.alertForRefreshing(count!)
+            }
+            if count==0{
+                
+            return
+            }
+            if since_id > 0{
+            
+                self.statues = result! + self.statues!
+            
+            }else if max_id>0{
+            
+             self.statues! += result!
+            self.stretchingUp = false
+            
+            }else{
+            
+            self.statues = result
+            
+            }
+
+        }
+      
         
         
     }
@@ -83,10 +164,12 @@ class HomeTableViewController: BasicTableViewController {
             tableView.registerClass(originateTableViewCell.self, forCellReuseIdentifier: CellType.originate.rawValue)
              tableView.registerClass(RelayTableViewCell.self, forCellReuseIdentifier: CellType.relay.rawValue)
             
+            tableView.separatorStyle=UITableViewCellSeparatorStyle.None
             tableView.estimatedRowHeight=250
 //            tableView.rowHeight=UITableViewAutomaticDimension
-            
-            tableView.separatorStyle=UITableViewCellSeparatorStyle.None
+            refreshControl = DataRefreshControl()
+            refreshControl?.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
+        
             loadData()
         }
     }
@@ -96,12 +179,18 @@ class HomeTableViewController: BasicTableViewController {
         return statues?.count ?? 0
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row==statues!.count-1{
+           stretchingUp = true
+            loadData()
+            
+        }
+        
         
         let statu = statues![indexPath.item]
         let cell=tableView.dequeueReusableCellWithIdentifier(CellType.cellReuseIdentifier(statu), forIndexPath: indexPath) as! WeiboTableViewCell
         
         cell.statuses=statu
-
+        
         return cell
     }
     

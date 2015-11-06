@@ -12,7 +12,7 @@ class ImageDS: NSObject {
         static let cache:NSCache={
         let cache = NSCache()
 //        cache.totalCostLimit=40
-          cache.countLimit = 20
+          cache.countLimit = 40
     
         return cache
         }()
@@ -44,61 +44,68 @@ class ImageDS: NSObject {
     
     class func img(urls:[NSURL],finished:finishedBlock){
     
-        let group = dispatch_group_create()
-        
-        
-
         for url in urls{
           //判断网络任务是否已执行
             if urlCache[url.absoluteString] != nil{
-            
-            return
+
+                continue
+                
             }
             urlCache[url.absoluteString] = url.absoluteString
             
-        
-            
-        dispatch_group_enter(group)
-            
        //MARK:- 下载图片
-    NSURLSession.sharedSession().downloadTaskWithURL(url) { (location, _, error) -> Void in
-         
-        if error != nil {
-        
-        ImageDS.promptAlert("网络不给力哦")
-        finished(data: nil, error: error)
-        return
-        }
+//    NSURLSession.sharedSession().downloadTaskWithURL(url) { (location, _, error) -> Void in
+//         
+//        if error != nil {
+//        
+//        ImageDS.promptAlert("网络不给力哦")
+//        finished(data: nil, error: error)
+//        return
+//        }
+//     
+//        let data = NSData(contentsOfURL: location!)
+//        
+//            cache.setObject(data!, forKey:url)
+//            
+////            NSFileManager.defaultManager().createFileAtPath(path!, contents: data, attributes: nil)
+//           dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//        
+//            finished(data: data, error: nil)
+//
+//           })
+//
+//        }.resume()
      
+    NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { (location, _, error) -> Void in
+        if error != nil {
+            
+            ImageDS.promptAlert("网络不给力哦")
+            finished(data: nil, error: error)
+            return
+        }
         
-
         let data = NSData(contentsOfURL: location!)
         
+        cache.setObject(data!, forKey:url)
         
-            cache.setObject(data!, forKey:url)
+        //            NSFileManager.defaultManager().createFileAtPath(path!, contents: data, attributes: nil)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
             
-//            NSFileManager.defaultManager().createFileAtPath(path!, contents: data, attributes: nil)
-           dispatch_async(dispatch_get_main_queue(), { () -> Void in
-        
             finished(data: data, error: nil)
-
-           })
-        
-            dispatch_group_leave(group)
-        
-        }.resume()
-     
-    }
-        dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
-      
-        dispatch_group_notify(group, dispatch_get_main_queue(), { () -> Void in
-            
-//            ImageDS.promptAlert("over")
-            print("over")
-            
             
         })
 
+        
+        
+    }).resume()
+            
+            
+            
+    }
+        
+        //貌似有点用
+//        dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+      
    
     }
     

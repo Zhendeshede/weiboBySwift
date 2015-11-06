@@ -1,4 +1,4 @@
-//
+
 //  WeiboData.swift
 //  新浪微博
 //
@@ -88,14 +88,17 @@ class WeiboData: NSObject {
     
     }
     ///加载网络数据，并转换成对象返回
-    class func loadStatuses(finished:(result:[WeiboData]?,error:NSError?)->()){
-        NetworkTool.shareNetworkTool.loadWeiboData { (result, error) -> () in
-            if error != nil{
-                
+    class func loadStatuses(since_id:Int,max_id:Int,finished:(result:[WeiboData]?,error:NSError?)->()){
+    
+        NetworkTool.shareNetworkTool.loadWeiboData(since_id,max_id:max_id) { (result, error) -> () in
+            if error != nil || result == nil {
                 
             finished(result: nil, error: error)
+                
+                
                 return 
             }
+
             if let array = result!["statuses"] as? [[String:AnyObject]]{
             
                 var weibos=[WeiboData]()
@@ -104,6 +107,7 @@ class WeiboData: NSObject {
                     weibos.append(WeiboData(dictionary: dict))
                     
                 }
+            
                 //将数据缓存
               imageCache(weibos, finished:finished)
                 
@@ -112,7 +116,7 @@ class WeiboData: NSObject {
                 return
             }
             
-            finished(result: nil, error: nil)
+           
             
         }
     }
@@ -120,18 +124,32 @@ class WeiboData: NSObject {
    
     private class func imageCache(datas:[WeiboData],finished:(result:[WeiboData]?,error:NSError?)->()){
 
-      
+        
+        let group = dispatch_group_create()
+       
         
         for data in datas{
-        
-        guard let imgUrls = data.pictures else{
             
-            continue
+            guard let imgUrls = data.pictures else{
+                
+                continue
             }
-        ImageDS.img(imgUrls, finished: { (_, error) -> () in
-           finished(result: datas, error: error)
+            dispatch_group_enter(group)
             
-        })
-    }
+            ImageDS.img(imgUrls, finished: { (_, error) -> () in
+                
+                
+               
+            })
+             dispatch_group_leave(group)
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
+            
+            finished(result: datas, error: nil)
+        }
+    
+
 }
+    
 }

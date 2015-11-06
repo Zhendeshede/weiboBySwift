@@ -16,5 +16,12 @@ extension UILabel{
         font=UIFont.systemFontOfSize(fontSize ?? 13)
         
     }
+    convenience init(texts:String,color:UIColor){
+     self.init()
+     text = texts
+     textColor = color
+//     sizeToFit()
+        
+    }
 
 }
