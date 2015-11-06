@@ -134,7 +134,7 @@ private class StatusesTopView:UIView{
             if let url = status?.user!.profile_image_url{
             
 
-                //TODO:
+
                 
                 NSURLSession.sharedSession().downloadTaskWithURL(NSURL(string: url)!, completionHandler: { (location, _, error) -> Void in
                     if error != nil{
@@ -161,18 +161,28 @@ private class StatusesTopView:UIView{
         vipIconView.image=status?.user?.vipImage
         memberIconView.image=status?.user?.memberImage
         
-          let timeStr = status?.created_at?.componentsSeparatedByString(" ")[3]
+            //TODO:
             
-          timeLabel.text=timeStr
+//          let timeStr = status?.created_at?.componentsSeparatedByString(" ")[3]
+//            timeLabel.text = timeStr!
+            
+            
            
+            if status?.created_at != nil && status!.created_at != ""{
+            timeLabel.text =  NSDate.Date(status!.created_at)!.dateDescription()
+
+            }
             
             if status?.source != nil && status!.source != ""{
-                var sourceStr:String? = status?.source?.componentsSeparatedByString("<")[1]
-                sourceStr = sourceStr?.componentsSeparatedByString(">").last
-
+//           var sourceStr:String? = status?.source?.componentsSeparatedByString("<")[1]
+//                sourceStr = sourceStr?.componentsSeparatedByString(">").las
+//                sourceLabel.text = "来自 " + sourceStr!
                 
-                sourceLabel.text = "来自 " + sourceStr!
+                sourceLabel.text = "来自 " + status!.source!
             }
+            
+            
+            
             
 //         source  -> "<a href=\"http://app.weibo.com/t/feed/2o92Kh\" rel=\"nofollow\">vivo_X5Max</a>"
 //         time ->  "Sun Oct 18 12:40:06 +0800 2015"

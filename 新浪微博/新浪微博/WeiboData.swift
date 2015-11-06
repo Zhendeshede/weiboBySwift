@@ -35,7 +35,15 @@ class WeiboData: NSObject {
     
     }
     ///微博来源
-    var source:String?
+    var source:String?{
+        didSet{
+        
+            source=source?.hrefLink().text
+            
+        }
+    
+    
+    }
     ///微博作者的用户信息字段
     var user:UserInfo?
 

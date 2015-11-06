@@ -47,7 +47,7 @@ class HomeTableViewController: BasicTableViewController {
         alertLabel.text = (count != 0) ? "刷新到\(count)条数据" : "暂时没有新微博"
          let rect = alertLabel.frame
         
-        UIView.animateWithDuration(3.5, animations: { () -> Void in
+        UIView.animateWithDuration(1.5, animations: { () -> Void in
             UIView.setAnimationRepeatAutoreverses(true)
             self.alertLabel.frame=CGRectOffset(rect, 0, 3*rect.height)
             
@@ -72,10 +72,12 @@ class HomeTableViewController: BasicTableViewController {
         
         return label
     }()
-//
-    
+
+    //下拉标记
     private var stretchingUp = false
     
+    
+    //MARK:- 加载数据
     func loadData(){
         
             refreshControl?.beginRefreshing()
